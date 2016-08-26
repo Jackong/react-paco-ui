@@ -22,14 +22,23 @@ class App extends React.Component {
     dispatch(goBack());
     dispatch(changeTitle('PACO-UI'));
   }
+  goGithub() {
+    window.location.href = 'https://github.com/Jackong/paco-ui';
+  }
   render() {
     const { pathname } = this.props.location;
     const left = window.history.length > 1 && pathname !== '/' ? (
       <i className={cx('paco', 'icon-back')} />
     ) : null;
+    const right = (
+      <i className={cx('paco', 'icon-home')} />
+    );
     return (
       <div>
-        <Navbar left={left} onLeft={this.goBack.bind(this)}>
+        <Navbar
+          left={left} onLeft={this.goBack.bind(this)}
+          right={right} onRight={this.goGithub.bind(this)}
+        >
           {this.props.title}
         </Navbar>
         {this.props.children}
