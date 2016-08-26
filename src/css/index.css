@@ -1,0 +1,9 @@
+body {
+  background-color: #fbfbfb;
+  margin: 0;
+}
+
+.home {
+  margin-top: 10px;
+  margin-bottom: @margin-top;
+}
