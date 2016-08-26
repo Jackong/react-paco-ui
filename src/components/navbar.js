@@ -14,9 +14,9 @@ class Navbar extends React.Component {
     return (
       <div className={cx('navbar-wrapper')}>
         <div className={cx('navbar')}>
-          <div className={cx('left')} onClick={onLeft}>{left}</div>
+          {left && <div className={cx('left')} onClick={onLeft}>{left}</div>}
           <div className={cx('title')}>{children}</div>
-          <div className={cx('right')} onClick={onRight}>{right}</div>
+          {right && <div className={cx('right')} onClick={onRight}>{right}</div>}
         </div>
       </div>
     );
