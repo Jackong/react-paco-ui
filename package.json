@@ -1,6 +1,6 @@
 {
   "name": "react-paco-ui",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "jackong",
   "scripts": {
     "start": "cross-env MOCK_API=/api* NODE_ENV=development PORT=3000 node server.js",
@@ -8,6 +8,7 @@
     "testing": "cross-env npm test -- --watch",
     "lib": "rm -rf lib && babel --plugins 'transform-runtime' ./src/components --out-dir ./components",
     "prepublish": "npm run lib",
+    "deploy": "cross-env NODE_ENV=production gulp deploy",
     "dev": "cross-env NODE_ENV=development gulp build",
     "prod": "cross-env NODE_ENV=production gulp build"
   },
