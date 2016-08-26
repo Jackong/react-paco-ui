@@ -3,6 +3,8 @@ const webpack = require('webpack-stream');
 const del = require('del');
 const RevAll = require('gulp-rev-all');
 const revReplace = require('gulp-rev-replace');
+const page = require('gulp-gh-pages');
+
 const config = require('./webpack.config');
 
 const buildDir = './dist';
@@ -40,4 +42,10 @@ gulp.task('replace', ['rev'], () => {
    .pipe(gulp.dest(buildDir));
 });
 
+
 gulp.task('build', ['clean', 'webpack', 'asset', 'rev', 'replace']);
+
+gulp.task('deploy', ['build'], () => {
+  return gulp.src(`${buildDir}/**/*`)
+  .pipe(page());
+});
