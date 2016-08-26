@@ -4,7 +4,7 @@ React Components for PACO-UI
 
 ## UI预览
 
-![qrcode](http://hcz.pingan.com/common/images/paco-ui.png?v=2)
+[UI预览](https://jackong.github.io/react-paco-ui)
 
 ## 使用说明
 
@@ -23,7 +23,7 @@ npm i --save react-paco-ui
 - 代码使用
 
 ```js
-import 'paco-ui';
+import 'paco-ui';//css-loader, style-loader required
 import Button from 'react-paco-ui/components/button';
 ```
 
