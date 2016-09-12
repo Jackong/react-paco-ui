@@ -11,10 +11,22 @@ const results = {
     description: '所提交内容已成功完成验证',
   },
   failure: {
-    next: 'tips',
+    next: 'warning',
     type: 'failure',
     title: '支付失败',
     description: '违章代办费托收不成功',
+  },
+  warning: {
+    next: 'waiting',
+    type: 'warning',
+    title: '警示内容',
+    description: '活动暂不支持此地区',
+  },
+  waiting: {
+    next: 'tips',
+    type: 'waiting',
+    title: '等待处理',
+    description: '已提交申请，等待处理中',
   },
   tips: {
     next: 'success',
