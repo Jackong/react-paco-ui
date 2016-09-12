@@ -97,6 +97,10 @@ const components = [
     name: 'Actionsheet',
     path: 'examples/actionsheet',
   },
+  {
+    name: 'Result',
+    path: 'examples/result',
+  },
 ];
 
 @connect()
