@@ -8,6 +8,7 @@ class Input extends React.Component {
     type: PropTypes.string,
     value: PropTypes.any,
     addons: PropTypes.node,
+    onChange: PropTypes.func,
   }
   static defaultProps = {
     addons: [],
@@ -19,7 +20,7 @@ class Input extends React.Component {
     return this.refs.input.value;
   }
   render() {
-    const { label, placeholder, type, value, addons } = this.props;
+    const { label, placeholder, type, value, addons, onChange } = this.props;
     return (
       <div className={cx('input-box')}>
         <label className={cx({ hide: !label })}>{label}</label>
@@ -30,6 +31,7 @@ class Input extends React.Component {
           type={type}
           placeholder={placeholder}
           defaultValue={value}
+          onChange={onChange}
         >
         </input>
         {addons.filter(addon => !addon.props.left)}

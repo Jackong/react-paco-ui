@@ -11,7 +11,7 @@ class Icon extends React.Component {
     const { name, highlight, onClick } = this.props;
     return (
       <i
-        className={cx('icon', 'paco', `icon-${name}`, { highlight })}
+        className={cx('icon-wrapper', 'paco', `icon-${name}`, { highlight })}
         onClick={onClick}
       />
     );
