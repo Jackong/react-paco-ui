@@ -1,6 +1,6 @@
 {
   "name": "react-paco-ui",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "jackong",
   "scripts": {
     "start": "cross-env MOCK_API=/api* NODE_ENV=development PORT=3000 node server.js",
@@ -17,7 +17,7 @@
     "fastclick": "^1.0.6",
     "history": "^2.0.1",
     "isomorphic-fetch": "^2.2.1",
-    "paco-ui": "^1.0.0",
+    "paco-ui": "^1.0.4",
     "react": "^15.2.0",
     "react-dom": "^15.2.0",
     "react-redux": "^4.4.5",

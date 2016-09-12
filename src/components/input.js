@@ -7,36 +7,11 @@ class Input extends React.Component {
     placeholder: PropTypes.string,
     type: PropTypes.string,
     value: PropTypes.any,
-    verification: PropTypes.bool,
-    icon: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.array,
-      PropTypes.object,
-    ]),
-    onClickIcon: PropTypes.func,
+    addons: PropTypes.node,
+    onChange: PropTypes.func,
   }
-  constructor(props) {
-    super(props);
-    this.state = { timing: -1 };
-  }
-  getCode() {
-    this.setState({ timing: 59 });
-    const intervalId = setInterval(() => {
-      const timing = this.state.timing - 1;
-      this.setState({ timing });
-      if (timing <= 0) {
-        clearInterval(intervalId);
-      }
-    }, 1000);
-  }
-  verification(timing) {
-    if (timing < 0) {
-      return '发送校验码';
-    }
-    if (timing > 0) {
-      return `${timing}秒后重发`;
-    }
-    return '重发校验码';
+  static defaultProps = {
+    addons: [],
   }
   clear() {
     this.refs.input.value = null;
@@ -45,26 +20,21 @@ class Input extends React.Component {
     return this.refs.input.value;
   }
   render() {
-    const { label, placeholder, type, value, verification, icon, onClickIcon } = this.props;
-    const { timing } = this.state;
+    const { label, placeholder, type, value, addons, onChange } = this.props;
     return (
       <div className={cx('input-box')}>
         <label className={cx({ hide: !label })}>{label}</label>
+        {addons.filter(addon => addon.props.left)}
         <input
           ref="input"
-          className={cx(type, { divider: verification })}
+          className={cx(type)}
           type={type}
           placeholder={placeholder}
           defaultValue={value}
+          onChange={onChange}
         >
         </input>
-        <i className={cx('icon', 'paco', icon, { hide: !icon })} onClick={onClickIcon} />
-        <span
-          onClick={this.getCode.bind(this)}
-          className={cx({ verification, hide: !verification, timing: timing > 0 })}
-        >
-        {this.verification(timing)}
-        </span>
+        {addons.filter(addon => !addon.props.left)}
       </div>
     );
   }
