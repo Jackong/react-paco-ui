@@ -28,6 +28,7 @@ import Text from './examples/text';
 import Card from './examples/card';
 import Illustration from './examples/illustration';
 import Actionsheet from './examples/actionsheet';
+import Result from './examples/result';
 
 const history = syncHistoryWithStore(hashHistory, store);
 
@@ -65,6 +66,7 @@ class Root extends React.Component {
                 <Route path="card" component={Card} />
                 <Route path="illustration" component={Illustration} />
                 <Route path="actionsheet" component={Actionsheet} />
+                <Route path="result" component={Result} />
               </Route>
             </Route>
           </Router>
