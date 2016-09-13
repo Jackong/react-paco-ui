@@ -32,7 +32,7 @@ class Component extends React.Component {
       this.setState({
         image: 'http://placehold.it/128x64?text=21389',
       });
-    }, 2000);
+    }, 1000);
   }
   render() {
     return (
