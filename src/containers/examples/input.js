@@ -1,13 +1,38 @@
 import React from 'react';
 
 import Input from '../../components/input';
-import Verification from '../../components/verification';
+import Captcha from '../../components/captcha';
 import Addon from '../../components/addon';
 import Icon from '../../components/icon';
 
 class Component extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      waiting: -1,
+      image: 'http://placehold.it/128x64?text=21389',
+    };
+  }
   onClear(ref) {
     this.refs[ref].clear();
+  }
+  onSMSCaptcha() {
+    this.setState({ waiting: 59 });
+    const intervalId = setInterval(() => {
+      const waiting = this.state.waiting - 1;
+      this.setState({ waiting });
+      if (waiting <= 0) {
+        clearInterval(intervalId);
+      }
+    }, 1000);
+  }
+  onImageCaptcha() {
+    this.setState({ image: null });
+    setTimeout(() => {
+      this.setState({
+        image: 'http://placehold.it/128x64?text=21389',
+      });
+    }, 1000);
   }
   render() {
     return (
@@ -41,8 +66,21 @@ class Component extends React.Component {
         <Input
           type="number"
           label="校验码" placeholder="输入校验码" addons={[
-            <Addon key="verification">
-              <Verification onClick={() => {}} />
+            <Addon key="verification" onClick={this.onSMSCaptcha.bind(this)}>
+              <Captcha>
+                {this.state.waiting}
+              </Captcha>
+            </Addon>,
+          ]}
+        />
+        <br />
+        <Input
+          type="number"
+          label="校验码" placeholder="输入校验码" addons={[
+            <Addon key="verification" onClick={this.onImageCaptcha.bind(this)}>
+              <Captcha>
+                {this.state.image}
+              </Captcha>
             </Addon>,
           ]}
         />

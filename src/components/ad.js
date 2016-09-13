@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react';
 import cx from 'classnames';
 
+import Button from './button';
+
 class Ad extends React.Component {
   static propTypes = {
     logo: PropTypes.string.isRequired,
@@ -9,6 +11,10 @@ class Ad extends React.Component {
     link: PropTypes.string.isRequired,
     style: PropTypes.object,
     onClose: PropTypes.func,
+    closable: PropTypes.bool,
+  }
+  static defaultProps = {
+    closable: true,
   }
   constructor(props) {
     super(props);
@@ -24,7 +30,7 @@ class Ad extends React.Component {
     }
   }
   render() {
-    const { logo, title, description, link, style } = this.props;
+    const { logo, title, description, link, style, closable } = this.props;
     const { hide } = this.state;
     return (
       <a href={link} className={cx('ad', { hide })} style={style}>
@@ -33,7 +39,11 @@ class Ad extends React.Component {
           <div className={cx('title')}>{title}</div>
           <div className={cx('desc')}>{description}</div>
         </div>
-        <i onClick={this.onClose.bind(this)} className={cx('close', 'paco', 'icon-close')} />
+        {closable ? (
+          <i onClick={this.onClose.bind(this)} className={cx('close', 'paco', 'icon-close')} />
+        ) : (
+          <Button type="primary">点击下载</Button>
+        )}
       </a>
     );
   }
