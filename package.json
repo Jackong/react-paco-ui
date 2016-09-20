@@ -1,6 +1,6 @@
 {
   "name": "react-paco-ui",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "author": "jackong",
   "scripts": {
     "start": "cross-env MOCK_API=/api* NODE_ENV=development PORT=3000 node server.js",
