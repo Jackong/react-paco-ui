@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react';
 import cx from 'classnames';
 
+import Mask from './mask';
+
 const provinces = [
   ['京', '津', '翼', '晋', '蒙', '辽', '吉', '黑', '沪', '苏'],
   ['浙', '皖', '闽', '赣', '鲁', '豫', '鄂', '湘', '粤'],
@@ -8,77 +10,62 @@ const provinces = [
   ['陕', '甘', '青', '宁', '新'],
 ];
 
-const back = { name: '返回', class: 'back' };
+const del = { name: '', value: 'DELETE', class: ['paco', 'icon-delete', 'delete'] };
 
-const cities = [
+const numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
+
+const codes = [
   [
-    'Q', 'W', 'E', 'R', 'T', 'Y', 'U',
-    { name: 'I', disabled: true }, { name: 'O', disabled: true }, 'P',
+    'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P',
   ],
   ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'],
   [
-    { name: '', value: 'UPPER', class: ['paco', 'icon-upper', 'upper'] },
+    { name: '', value: 'UPPER', class: ['paco', 'icon-upper', 'upper'], disabled: true },
     'Z', 'X', 'C', 'V', 'B', 'N', 'M',
-    { name: '', value: 'DELETE', class: ['paco', 'icon-delete', 'delete'], disabled: true },
-  ],
-  [
-    { name: '-', class: ['minus'], disabled: true },
-    { name: '*', class: ['mult'], disabled: true },
-    { name: '空格', class: ['blank'], disabled: true },
-    back,
+    del,
   ],
 ];
 
 class Keyboard extends React.Component {
   static propTypes = {
+    onKey: PropTypes.func.isRequired,
+    onDel: PropTypes.func.isRequired,
     hide: PropTypes.bool,
-    onEnter: PropTypes.func,
+    type: PropTypes.oneOf(['province', 'city', 'code']),
+    onCancel: PropTypes.func.isRequired,
   }
-  constructor(props) {
-    super(props);
-    this.state = { province: null, city: null, type: 'province' };
+  static defaultProps = {
+    type: 'province',
   }
-  onProvince(province) {
-    this.setState({ province, type: 'city' });
-  }
-  onCity(city) {
-    if (typeof city === 'object' && city.disabled) {
+  onKey(key) {
+    const { type } = this.props;
+    if ((typeof key === 'object' && key.disabled)
+      || (type === 'city' && [del, 'I', 'O'].indexOf(key) >= 0)) {
       return;
     }
-    if (city === back) {
-      this.back();
+    const { onKey, onDel } = this.props;
+    if (key === del) {
+      onDel();
       return;
     }
-    this.setState({ city });
-    const { onEnter } = this.props;
-    if (!onEnter) {
-      return;
-    }
-    let value = city;
-    if (typeof city === 'object') {
-      value = city.value;
-    }
-    onEnter(value);
+    onKey({ [type]: key });
   }
-  back() {
-    this.setState({ type: 'province' });
-  }
-  keys(allKeys, selected, abled, onClick) {
+  keys(allKeys, onClick) {
     return allKeys.map((keys, row) => (
       <div key={row} className={cx('keys')}>
         {keys.map((key, col) => {
           let name = key;
           let clz = '';
-          let disabled = (abled && abled.indexOf(key) < 0);
+          let disabled = this.props.type === 'city' && ['I', 'O'].indexOf(key) >= 0;
           if (typeof key === 'object') {
             name = key.name;
             clz = key.class;
-            disabled = key.disabled;
+            disabled = key.disabled || (this.props.type === 'city' && key === del);
           }
           return (
             <span
               key={col}
-              className={cx('key', clz, { selected: selected === key, disabled })}
+              className={cx('key', clz, { disabled })}
               onClick={() => onClick(key)}
             >
               {name}
@@ -89,17 +76,24 @@ class Keyboard extends React.Component {
     ));
   }
   province() {
-    return this.keys(provinces, this.state.province, null, this.onProvince.bind(this));
+    return this.keys(provinces, this.onKey.bind(this));
   }
   city() {
-    return this.keys(cities, this.state.city, this.state.province.cities, this.onCity.bind(this));
+    return this.keys(
+      [numbers.map(name => ({ name, disabled: true })), ...codes], this.onKey.bind(this)
+    );
+  }
+  code() {
+    return this.keys([numbers, ...codes], this.onKey.bind(this));
   }
   render() {
-    const { hide } = this.props;
-    const { type } = this.state;
+    const { hide, type, onCancel } = this.props;
     return (
-      <div className={cx('keyboard', { hide })}>
-        {this[type].call(this)}
+      <div>
+        <Mask onClick={onCancel} hide={hide} transparent />
+        <div className={cx('keyboard', { hide })}>
+          {this[type].call(this)}
+        </div>
       </div>
     );
   }
