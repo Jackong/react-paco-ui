@@ -63,13 +63,14 @@ class Keyboard extends React.Component {
             disabled = key.disabled || (this.props.type === 'city' && key === del);
           }
           return (
-            <span
+            <button
               key={col}
-              className={cx('key', clz, { disabled })}
+              className={cx('key', clz)}
+              disabled={disabled}
               onClick={() => onClick(key)}
             >
               {name}
-            </span>
+            </button>
           );
         })}
       </div>

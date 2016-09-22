@@ -14,8 +14,9 @@ class AgreeMe extends React.Component {
     const { children } = this.props;
     return (
       <span className={cx('agree-it')}>
-        <CheckBox ref="checkbox" checked>同意</CheckBox>
-        {children}
+        <CheckBox ref="checkbox" checked>
+          同意{children}
+        </CheckBox>
       </span>
     );
   }

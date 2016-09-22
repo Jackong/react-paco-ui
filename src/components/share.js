@@ -37,14 +37,12 @@ class Share extends React.Component {
               <div className={cx('name')}>{channel.name}</div>
             </div>
           ))}
-          <div className={cx('cancel')}>
-            <Button
-              type="bottom"
-              onClick={() => onCancel(new Error('Cancel share panel'))}
-            >
-              取消
-            </Button>
-          </div>
+          <Button
+            type="bottom"
+            onClick={() => onCancel(new Error('Cancel share panel'))}
+          >
+            取消
+          </Button>
         </div>
       </div>
     );

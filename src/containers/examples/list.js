@@ -1,18 +1,13 @@
 import React from 'react';
 
-import Row from '../../components/row';
+import Item from '../../components/item';
 import List from '../../components/list';
 import Switch from '../../components/switch';
 import Checkbox from '../../components/checkbox';
 import Tab from '../../components/tab';
 import Tabs from '../../components/tabs';
-
-const styles = {
-  row: {
-    marginTop: 5,
-    marginBottom: 5,
-  },
-};
+import Icon from '../../components/icon';
+import Badge from '../../components/badge';
 
 const tabs = [
   {
@@ -38,23 +33,32 @@ class Component extends React.Component {
   single(type) {
     return (
       <div>
-        <Row type={type} description="内容内容" style={styles.row}>标题文字</Row>
-        <Row type={type} description="内容内容" icon="arrow-right" style={styles.row} badge="unread">
-          标题文字
-        </Row>
-        <Row type={type} icon="arrow-right" style={styles.row} badge="new">标题文字</Row>
-        <Row type={type} icon={<Switch isOpen />} style={styles.row} >标题文字</Row>
+        <br />
+        <Item type={type} title="标题文字" description="内容内容" />
+        <br />
+        <Item
+          type={type} title="标题文字" description="内容内容"
+          icon={<Icon name="arrow-right" />} badge={<Badge type="small" />}
+        />
+        <br />
+        <Item
+          type={type} title="标题文字"
+          icon={<Icon name="arrow-right" />} badge={<Badge type="flag">new</Badge>}
+        />
+        <br />
+        <Item type={type} title="标题文字" icon={<Switch isOpen />} />
+        <br />
         <List>
-          <Row type={type} description="内容内容">标题文字</Row>
-          <Row type={type} description="内容内容" icon="arrow-right">标题文字</Row>
-          <Row type={type} icon="arrow-right">标题文字</Row>
-          <Row type={type} description="内容内容" icon={<Checkbox checked />}>标题文字</Row>
+          <Item type={type} title="标题文字" description="内容内容" />
+          <Item type={type} title="标题文字" description="内容内容" icon={<Icon name="arrow-right" />} />
+          <Item type={type} title="标题文字" icon={<Icon name="arrow-right" />} />
+          <Item type={type} title="标题文字" description="内容内容" icon={<Checkbox checked />} />
         </List>
         <br />
         <List>
-          <Row type={type} description="内容内容" image="http://placehold.it/29x29/1cabeb/ffffff?text=PACO-UI" >标题文字</Row>
-          <Row type={type} description="内容内容" image="http://placehold.it/29x29/1cabeb/ffffff?text=PACO-UI" icon="arrow-right">标题文字</Row>
-          <Row type={type} image="http://placehold.it/29x29/1cabeb/ffffff?text=PACO-UI" icon="arrow-right">标题文字</Row>
+          <Item type={type} title="标题文字" description="内容内容" thumbnail="http://placehold.it/29x29/1cabeb/ffffff?text=PACO-UI" />
+          <Item type={type} title="标题文字" description="内容内容" thumbnail="http://placehold.it/29x29/1cabeb/ffffff?text=PACO-UI" icon={<Icon name="arrow-right" />} />
+          <Item type={type} title="标题文字" thumbnail="http://placehold.it/29x29/1cabeb/ffffff?text=PACO-UI" icon={<Icon name="arrow-right" />} />
         </List>
       </div>
     );
@@ -62,26 +66,21 @@ class Component extends React.Component {
   double(type) {
     return (
       <div>
-        <Row type={type} description="内容内容" style={styles.row}>标题文字</Row>
-        <Row type={type} description="内容内容" icon="arrow-right" style={styles.row}>
-          标题文字
-        </Row>
+        <br />
+        <Item type={type} title="标题文字" description="内容内容" />
+        <br />
+        <Item type={type} title="标题文字" description="内容内容" icon={<Icon name="arrow-right" />} />
+        <br />
         <List>
-          <Row type={type} description="内容内容">标题文字</Row>
-          <Row type={type} description="内容内容" icon="arrow-right">标题文字</Row>
-          <Row type={type} description="内容内容" icon={<Checkbox checked />}>标题文字</Row>
+          <Item type={type} title="标题文字" description="内容内容" />
+          <Item type={type} title="标题文字" description="内容内容" icon={<Icon name="arrow-right" />} />
+          <Item type={type} title="标题文字" description="内容内容" icon={<Checkbox checked />} />
         </List>
         <br />
         <List>
-          <Row type={type} description="内容内容" image="http://placehold.it/45/1cabeb/ffffff?text=PACO-UI" badge="unread" time="下午 6:00">
-            标题文字
-          </Row>
-          <Row type={type} description="内容内容" image="http://placehold.it/45/1cabeb/ffffff?text=PACO-UI" time="上午 10:20">
-            标题文字
-          </Row>
-          <Row type={type} description="内容内容" image="http://placehold.it/45/1cabeb/ffffff?text=PACO-UI" time="昨天">
-            标题文字
-          </Row>
+          <Item type={type} title="标题文字" description="内容内容" thumbnail="http://placehold.it/45/1cabeb/ffffff?text=PACO-UI" badge={<Badge type="large" />} tips="下午 6:00" />
+          <Item type={type} title="标题文字" description="内容内容" thumbnail="http://placehold.it/45/1cabeb/ffffff?text=PACO-UI" badge={<Badge type="large">1</Badge>} tips="上午 10:20" />
+          <Item type={type} title="标题文字" description="内容内容" thumbnail="http://placehold.it/45/1cabeb/ffffff?text=PACO-UI" tips="昨天" />
         </List>
       </div>
     );

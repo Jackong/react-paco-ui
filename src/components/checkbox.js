@@ -31,8 +31,8 @@ class CheckBox extends React.Component {
     return (
       <span className={cx('checkbox')} onClick={this.onToggle.bind(this)}>
         <input type="checkbox" checked={checked} onChange={this.onToggle.bind(this)} />
-        <i className={cx('paco')} />
-        {children}
+        <i className={cx('paco', 'icon', checked ? 'icon-right' : 'icon-circle')} />
+        <span>{children}</span>
       </span>
     );
   }

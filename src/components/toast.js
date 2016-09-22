@@ -8,6 +8,12 @@ const types = {
   LOADING: 'loading',
 };
 
+const icons = {
+  [types.SUCCESS]: 'right-o',
+  [types.FAIL]: 'wrong-o',
+  [types.OPPS]: 'opps',
+};
+
 class Toast extends React.Component {
   static propTypes = {
     children: PropTypes.node,
@@ -22,7 +28,7 @@ class Toast extends React.Component {
     const { style, children, type } = this.props;
     return (
       <div className={cx('toast', { hide: !children })} style={style}>
-        <div className={cx('icon', type)}></div>
+        <i className={cx('paco', 'icon', type, `icon-${icons[type]}`)} />
         <p className={cx('message')}>{children}</p>
       </div>
     );

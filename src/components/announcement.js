@@ -27,13 +27,11 @@ class Announcement extends React.Component {
     const { type, link, onClose } = this.props;
     const icon = icons[type];
     return (
-      <a className={cx('announcement-wrapper', { hide: !this.props.children })} href={link}>
-        <div className={cx('announcement')}>
-          <i className={cx('paco', icon, { icon })} onClick={onClose || (() => {})} />
-          <span className={cx('message')}>
-            {this.props.children}
-          </span>
-        </div>
+      <a className={cx('announcement', { hide: !this.props.children })} href={link}>
+        <i className={cx('paco', icon, { icon })} onClick={onClose || (() => {})} />
+        <span className={cx('message')}>
+          {this.props.children}
+        </span>
       </a>
     );
   }

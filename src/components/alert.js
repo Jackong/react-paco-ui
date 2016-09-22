@@ -31,10 +31,11 @@ class Alert extends React.Component {
   }
   render() {
     const { header, ok, cancel, children, style } = this.props;
+    const hide = !children;
     return (
-      <div className={cx({ hide: !children })}>
-        <Mask />
-        <div className={cx('alert')} style={style}>
+      <div>
+        <Mask hide={hide} />
+        <div className={cx('alert', { hide })} style={style}>
           <p className={cx('header')}>
             {header}
           </p>

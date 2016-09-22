@@ -29,16 +29,14 @@ class Modal extends React.Component {
   render() {
     const { image, desc, tips, btn, isShow } = this.props;
     return (
-      <div className={cx({ hide: !isShow })}>
-        <Mask onClick={this.onClose.bind(this)} />
-        <div className={cx('modal')}>
+      <div>
+        <Mask onClick={this.onClose.bind(this)} hide={!isShow} />
+        <div className={cx('modal', { hide: !isShow })}>
           <i onClick={this.onClose.bind(this)} className={cx('close', 'paco', 'icon-close')} />
           <img className={cx('image')} src={image} role="presentation" />
           <div className={cx('desc')}>{desc}</div>
-          <div className={cx('tips')}>{tips}</div>
-          <div className={cx('btns')}>
-            <Button onClick={this.onOK.bind(this)} type="primary">{btn}</Button>
-          </div>
+          <div className={cx('desc')}>{tips}</div>
+          <Button onClick={this.onOK.bind(this)} type="primary">{btn}</Button>
         </div>
       </div>
     );

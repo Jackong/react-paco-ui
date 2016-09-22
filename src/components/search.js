@@ -31,9 +31,9 @@ class Search extends React.Component {
     const { placeholder } = this.props;
     const { focus } = this.state;
     return (
-      <div className={cx('search-wrapper', { focus })}>
+      <div>
         <Mask hide={!focus} onClick={this.onCancel.bind(this)} />
-        <div className={cx('search')}>
+        <div className={cx('search', { focus })}>
           <div className={cx('input')}>
             <input
               ref="search"
@@ -41,10 +41,13 @@ class Search extends React.Component {
               onFocus={this.onFocus.bind(this)}
             />
             <span className={'placeholder'} onClick={() => this.refs.search.focus()}>
-              <i className={cx('paco', 'icon-search')} />
+              <i className={cx('icon', 'paco', 'icon-search')} />
               <span className={cx('text')}>{placeholder}</span>
             </span>
-            <i className={cx('clear', 'paco', 'icon-wrong')} onClick={this.onClear.bind(this)} />
+            <i
+              className={cx('icon', 'clear', 'paco', 'icon-wrong')}
+              onClick={this.onClear.bind(this)}
+            />
           </div>
           <span
             onClick={this.onCancel.bind(this)}

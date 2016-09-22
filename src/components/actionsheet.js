@@ -14,9 +14,9 @@ class Actionsheet extends React.Component {
   render() {
     const { tips, children, hide, onCancel } = this.props;
     return (
-      <div className={cx('actionsheet-wrapper', { hide })}>
-        <Mask onClick={onCancel} />
-        <div className={cx('actionsheet')}>
+      <div>
+        <Mask onClick={onCancel} hide={hide} />
+        <div className={cx('actionsheet', { hide })}>
           <div className={cx('tips')}>
             {tips}
           </div>
