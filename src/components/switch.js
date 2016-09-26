@@ -1,7 +1,8 @@
 import React, { PropTypes } from 'react';
 import cx from 'classnames';
+import 'paco-ui/css/switch.css';
 
-class Switch extends React.Component {
+class Switch extends React.PureComponent {
   static propTypes = {
     isOpen: PropTypes.bool,
     onToggle: PropTypes.func,

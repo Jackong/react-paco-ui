@@ -1,9 +1,10 @@
 import React, { PropTypes } from 'react';
+import 'paco-ui/css/ad.css';
 import cx from 'classnames';
 
 import Button from './button';
 
-class Ad extends React.Component {
+class Ad extends React.PureComponent {
   static propTypes = {
     logo: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,

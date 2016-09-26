@@ -1,7 +1,8 @@
 import React, { PropTypes } from 'react';
 import cx from 'classnames';
+import 'paco-ui/css/result.css';
 
-class Result extends React.Component {
+class Result extends React.PureComponent {
   static propTypes = {
     type: PropTypes.oneOf(['success', 'failure', 'warning', 'waiting', 'tips']).isRequired,
     title: PropTypes.string.isRequired,

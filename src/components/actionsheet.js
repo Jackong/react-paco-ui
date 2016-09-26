@@ -1,10 +1,11 @@
 import React, { PropTypes } from 'react';
+import 'paco-ui/css/actionsheet.css';
 import cx from 'classnames';
 
 import Button from './button';
 import Mask from './mask';
 
-class Actionsheet extends React.Component {
+class Actionsheet extends React.PureComponent {
   static propTypes = {
     tips: PropTypes.string,
     children: PropTypes.node.isRequired,

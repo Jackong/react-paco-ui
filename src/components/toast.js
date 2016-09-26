@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import 'paco-ui/css/toast.css';
 import cx from 'classnames';
 
 const types = {
@@ -14,7 +15,7 @@ const icons = {
   [types.OPPS]: 'opps',
 };
 
-class Toast extends React.Component {
+class Toast extends React.PureComponent {
   static propTypes = {
     children: PropTypes.node,
     style: PropTypes.object,

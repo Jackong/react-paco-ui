@@ -1,7 +1,8 @@
 import React, { PropTypes } from 'react';
 import cx from 'classnames';
+import 'paco-ui/css/tab.css';
 
-class Tab extends React.Component {
+class Tab extends React.PureComponent {
   static propTypes = {
     children: PropTypes.node.isRequired,
     active: PropTypes.bool,

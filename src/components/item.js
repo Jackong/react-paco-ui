@@ -1,7 +1,8 @@
 import React, { PropTypes } from 'react';
+import 'paco-ui/css/item.css';
 import cx from 'classnames';
 
-class Item extends React.Component {
+class Item extends React.PureComponent {
   static propTypes = {
     type: PropTypes.oneOf(['single', 'double']).isRequired,
     description: PropTypes.node,

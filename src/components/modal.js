@@ -1,10 +1,11 @@
 import React, { PropTypes } from 'react';
 import cx from 'classnames';
+import 'paco-ui/css/modal.css';
 
 import Button from './button';
 import Mask from './mask';
 
-class Modal extends React.Component {
+class Modal extends React.PureComponent {
   static propTypes = {
     image: PropTypes.string.isRequired,
     desc: PropTypes.string.isRequired,

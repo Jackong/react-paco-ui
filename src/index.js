@@ -3,7 +3,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import FastClick from 'fastclick';
 
-import 'paco-ui';
+import 'paco-ui/css/font.css';
 import './css/index.css';
 import Root from './containers/root';
 

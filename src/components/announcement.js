@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import cx from 'classnames';
+import 'paco-ui/css/announcement.css';
 
 const types = {
   NORMAL: 'normal',
@@ -12,7 +13,7 @@ const icons = {
   [types.CLOSE]: 'icon-close',
 };
 
-class Announcement extends React.Component {
+class Announcement extends React.PureComponent {
   static propTypes = {
     children: PropTypes.node,
     type: PropTypes.oneOf([types.NORMAL, types.LINK, types.CLOSE]),

@@ -1,7 +1,8 @@
 import React, { PropTypes } from 'react';
 import cx from 'classnames';
+import 'paco-ui/css/border.css';
 
-class Border extends React.Component {
+class Border extends React.PureComponent {
   static propTypes = {
     position: PropTypes.oneOf([
       'left', 'right',

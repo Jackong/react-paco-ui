@@ -1,10 +1,11 @@
 import React, { PropTypes } from 'react';
 import cx from 'classnames';
+import 'paco-ui/css/alert.css';
 
 import Button from './button';
 import Mask from './mask';
 
-class Alert extends React.Component {
+class Alert extends React.PureComponent {
   static propTypes = {
     header: PropTypes.string,
     children: PropTypes.node,

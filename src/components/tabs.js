@@ -1,12 +1,13 @@
 import React, { PropTypes } from 'react';
 import cx from 'classnames';
+import 'paco-ui/css/tab.css';
 
 const types = {
   NORMAL: 'normal',
   PILLS: 'pills',
 };
 
-class Tabs extends React.Component {
+class Tabs extends React.PureComponent {
   static propTypes = {
     type: PropTypes.oneOf([types.NORMAL, types.PILLS]),
     children: PropTypes.node.isRequired,

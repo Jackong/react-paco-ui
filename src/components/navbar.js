@@ -1,7 +1,8 @@
 import React, { PropTypes } from 'react';
+import 'paco-ui/css/navbar.css';
 import cx from 'classnames';
 
-class Navbar extends React.Component {
+class Navbar extends React.PureComponent {
   static propTypes = {
     left: PropTypes.node,
     onLeft: PropTypes.func,

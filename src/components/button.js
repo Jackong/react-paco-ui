@@ -1,7 +1,8 @@
 import React, { PropTypes } from 'react';
 import cx from 'classnames';
+import 'paco-ui/css/button.css';
 
-class Button extends React.Component {
+class Button extends React.PureComponent {
   static propTypes = {
     children: PropTypes.node.isRequired,
     style: PropTypes.object,

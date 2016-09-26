@@ -1,7 +1,8 @@
 import React, { PropTypes } from 'react';
 import cx from 'classnames';
+import 'paco-ui/css/input.css';
 
-class Input extends React.Component {
+class Input extends React.PureComponent {
   static propTypes = {
     label: PropTypes.string,
     placeholder: PropTypes.string,

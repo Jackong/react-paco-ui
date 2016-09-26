@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import cx from 'classnames';
+import 'paco-ui/css/keyboard.css';
 
 import Mask from './mask';
 
@@ -26,7 +27,7 @@ const codes = [
   ],
 ];
 
-class Keyboard extends React.Component {
+class Keyboard extends React.PureComponent {
   static propTypes = {
     onKey: PropTypes.func.isRequired,
     onDel: PropTypes.func.isRequired,

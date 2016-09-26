@@ -1,9 +1,10 @@
 import React, { PropTypes } from 'react';
 import cx from 'classnames';
+import 'paco-ui/css/agreement.css';
 
 import CheckBox from './checkbox';
 
-class AgreeMe extends React.Component {
+class AgreeMe extends React.PureComponent {
   static propTypes = {
     children: PropTypes.node.isRequired,
   }

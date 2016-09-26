@@ -1,7 +1,8 @@
 import React, { PropTypes } from 'react';
 import cx from 'classnames';
+import 'paco-ui/css/card.css';
 
-class Card extends React.Component {
+class Card extends React.PureComponent {
   static propTypes = {
     header: PropTypes.node,
     title: PropTypes.string.isRequired,

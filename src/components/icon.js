@@ -1,7 +1,8 @@
 import React, { PropTypes } from 'react';
 import cx from 'classnames';
+import 'paco-ui/css/icon.css';
 
-class Icon extends React.Component {
+class Icon extends React.PureComponent {
   static propTypes = {
     name: PropTypes.string.isRequired,
     highlight: PropTypes.bool,

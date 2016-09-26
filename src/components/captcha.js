@@ -1,9 +1,10 @@
 import React, { PropTypes } from 'react';
 import cx from 'classnames';
+import 'paco-ui/css/captcha.css';
 
 import Icon from './icon';
 
-class Captcha extends React.Component {
+class Captcha extends React.PureComponent {
   static propTypes = {
     onClick: PropTypes.func,
     children: PropTypes.oneOfType([

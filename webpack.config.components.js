@@ -1,9 +1,5 @@
 const webpack = require('webpack');
 const fs = require('fs');
-const autoprefixer = require('autoprefixer');
-const precss = require('precss');
-const asImport = require('postcss-import');
-const calc = require('postcss-calc');
 
 const entries = fs
   .readdirSync('./src/components/')
@@ -17,6 +13,7 @@ for (let i = 0; i < entries.length; i++) {
   const name = file.replace(/\.js$/, '');
   entry[name] = `./src/components/${file}`;
   externals[`./${name}`] = `./${name}`;
+  externals[`paco-ui/css/${name}.css`] = `paco-ui/css/${name}.css`;
 }
 
 module.exports = {
@@ -24,7 +21,6 @@ module.exports = {
   output: {
     filename: '[name].js',
     libraryTarget: 'umd',
-    libarray: 'ReactPacoUI',
   },
   plugins: [
     new webpack.optimize.UglifyJsPlugin({
@@ -42,16 +38,6 @@ module.exports = {
       },
     ],
   },
-  postcss(wp) {
-    return [
-      asImport({
-        addDependencyTo: wp,
-      }),
-      precss,
-      calc,
-      autoprefixer,
-    ];
-  },
   externals: Object.assign({}, {
     react: {
       root: 'React',
@@ -64,6 +50,11 @@ module.exports = {
       commonjs: 'classnames',
       commonjs2: 'classnames',
       amd: 'classnames',
+    },
+    'react-css-modules': {
+      commonjs: 'react-css-modules',
+      commonjs2: 'react-css-modules',
+      amd: 'react-css-modules',
     },
   }, externals),
 };

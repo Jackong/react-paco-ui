@@ -1,7 +1,8 @@
 import React, { PropTypes } from 'react';
+import 'paco-ui/css/text.css';
 import cx from 'classnames';
 
-class Text extends React.Component {
+class Text extends React.PureComponent {
   static propTypes = {
     type: PropTypes.oneOf(['t1', 't2', 't3', 't4', 't5', 't6']),
     children: PropTypes.node.isRequired,

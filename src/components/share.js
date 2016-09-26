@@ -1,10 +1,11 @@
 import React, { PropTypes } from 'react';
 import cx from 'classnames';
+import 'paco-ui/css/share.css';
 
 import Button from './button';
 import Mask from './mask';
 
-class Share extends React.Component {
+class Share extends React.PureComponent {
   static propTypes = {
     channels: PropTypes.arrayOf(PropTypes.shape({
       image: PropTypes.string.isRequired,

@@ -1,7 +1,8 @@
 import React, { PropTypes } from 'react';
 import cx from 'classnames';
+import 'paco-ui/css/checkbox.css';
 
-class CheckBox extends React.Component {
+class CheckBox extends React.PureComponent {
   static propTypes = {
     onToggle: PropTypes.func,
     children: PropTypes.node,

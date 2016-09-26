@@ -1,9 +1,10 @@
 import React, { PropTypes } from 'react';
 import cx from 'classnames';
+import 'paco-ui/css/search.css';
 
 import Mask from './mask';
 
-class Search extends React.Component {
+class Search extends React.PureComponent {
   static propTypes = {
     placeholder: PropTypes.string,
   }

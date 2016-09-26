@@ -1,7 +1,8 @@
 import React, { PropTypes } from 'react';
 import cx from 'classnames';
+import 'paco-ui/css/mask.css';
 
-class Mask extends React.Component {
+class Mask extends React.PureComponent {
   static propTypes = {
     onClick: PropTypes.func,
     transparent: PropTypes.bool,
