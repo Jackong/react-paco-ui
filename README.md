@@ -8,7 +8,7 @@ React Components for PACO-UI
 
 ## 使用说明
 
-- 引入CSS
+- 引入[paco-ui](https://github.com/Jackong/paco-ui)
 
 ```bash
 npm i --save paco-ui
@@ -23,11 +23,8 @@ npm i --save react-paco-ui
 - 代码使用
 
 ```js
-import 'paco-ui';//css-loader, style-loader required
 import Button from 'react-paco-ui/components/button';
 ```
-
-> 注：`VERSION`为要使用版本
 
 
 ## 组件说明
