@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react';
-import cx from 'classnames';
+import 'paco-ui/css/alert.css';
 
 import Button from './button';
 import Mask from './mask';
 
-class Alert extends React.Component {
+class Alert extends React.PureComponent {
   static propTypes = {
     header: PropTypes.string,
     children: PropTypes.node,
@@ -35,14 +35,14 @@ class Alert extends React.Component {
     return (
       <div>
         <Mask hide={hide} />
-        <div className={cx('alert', { hide })} style={style}>
-          <p className={cx('header')}>
+        <div className={`alert ${hide && 'hide'}`} style={style}>
+          <p className="header">
             {header}
           </p>
-          <p className={cx('message')}>
+          <p className="message">
             {children}
           </p>
-          <div className={cx('btn-group', ok && cancel ? 'col-2' : 'col-1')}>
+          <div className={`btn-group ${(ok && cancel) ? 'col-2' : 'col-1'}`}>
             {cancel && <Button type="secondary" onClick={this.onCancel.bind(this)}>
               {cancel}
             </Button>}

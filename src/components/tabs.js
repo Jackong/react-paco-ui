@@ -1,12 +1,12 @@
 import React, { PropTypes } from 'react';
-import cx from 'classnames';
+import 'paco-ui/css/tab.css';
 
 const types = {
   NORMAL: 'normal',
   PILLS: 'pills',
 };
 
-class Tabs extends React.Component {
+class Tabs extends React.PureComponent {
   static propTypes = {
     type: PropTypes.oneOf([types.NORMAL, types.PILLS]),
     children: PropTypes.node.isRequired,
@@ -19,7 +19,7 @@ class Tabs extends React.Component {
   render() {
     const { type, children, style } = this.props;
     return (
-      <div className={cx('tabs', type, `col-${children.length}`)} style={style}>
+      <div className={`tabs ${type} col-${children.length}`} style={style}>
         {children}
       </div>
     );

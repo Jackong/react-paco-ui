@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
-import cx from 'classnames';
+import 'paco-ui/css/item.css';
 
-class Item extends React.Component {
+class Item extends React.PureComponent {
   static propTypes = {
     type: PropTypes.oneOf(['single', 'double']).isRequired,
     description: PropTypes.node,
@@ -13,29 +13,19 @@ class Item extends React.Component {
     thumbnail: PropTypes.string,
     tips: PropTypes.string,
   }
-  icon(icon) {
-    if (!icon) {
-      return null;
-    }
-    return typeof icon === 'string' ? (
-      <i className={cx('icon', 'paco', `icon-${icon}`)} />
-    ) : (
-      <span className={cx('icon')}>{icon}</span>
-    );
-  }
   single() {
     const { title, thumbnail, description, badge, icon, onClick, style } = this.props;
     return (
       <div
-        className={cx('item', 'single')} data-type={thumbnail && 'thumbnail'}
+        className="item single" data-type={thumbnail && 'thumbnail'}
         onClick={onClick} style={style}
       >
-        {thumbnail && <img src={thumbnail} className={cx('thumbnail')} role="presentation" />}
-        <span className={cx('title')}>{title}</span>
-        {badge && <span className={cx('badge-ctn')}>{badge}</span>}
-        <span className={cx('description')}>
+        {thumbnail && <img src={thumbnail} className="thumbnail" role="presentation" />}
+        <span className="title">{title}</span>
+        {badge && <span className="badge-ctn">{badge}</span>}
+        <span className="description">
           {description}
-          {icon && <span className={cx('icon')}>{icon}</span>}
+          {icon && <span className="icon">{icon}</span>}
         </span>
       </div>
     );
@@ -43,15 +33,15 @@ class Item extends React.Component {
   double() {
     const { title, thumbnail, description, badge, icon, tips, onClick, style } = this.props;
     return (
-      <div className={cx('item', 'double')} onClick={onClick} style={style}>
-        {thumbnail && <img src={thumbnail} className={cx('thumbnail')} role="presentation" />}
-        <span className={cx('content')}>
-          {badge && <span className={cx('badge-ctn')}>{badge}</span>}
-          <span className={cx('title')}>{title}</span>
-          <span className={cx('description')}>{description}</span>
+      <div className="item double" onClick={onClick} style={style}>
+        {thumbnail && <img src={thumbnail} className="thumbnail" role="presentation" />}
+        <span className="content">
+          {badge && <span className="badge-ctn">{badge}</span>}
+          <span className="title">{title}</span>
+          <span className="description">{description}</span>
         </span>
-        <span className={cx('tips')}>{tips}</span>
-        <span className={cx('icon')}>{icon}</span>
+        <span className="tips">{tips}</span>
+        <span className="icon">{icon}</span>
       </div>
     );
   }

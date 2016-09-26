@@ -3,7 +3,8 @@ const path = require('path');
 const autoprefixer = require('autoprefixer');
 const precss = require('precss');
 const asImport = require('postcss-import');
-const calc = require('postcss-calc');
+const mqpacker = require('css-mqpacker');
+const cssnano = require('cssnano');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -20,8 +21,8 @@ const plugins = [
     cdns: DEBUG ? [] : [
       '//cdn.bootcss.com/babel-polyfill/6.9.1/polyfill.min.js',
       '//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js',
-      '//cdn.bootcss.com/react/15.2.0/react.min.js',
-      '//cdn.bootcss.com/react/15.2.0/react-dom.min.js',
+      '//cdn.bootcss.com/react/15.3.2/react.min.js',
+      '//cdn.bootcss.com/react/15.3.2/react-dom.min.js',
       '//cdn.bootcss.com/react-router/2.5.2/ReactRouter.min.js',
       '//cdn.bootcss.com/history/3.0.0/History.min.js',
       '//cdn.bootcss.com/redux/3.5.2/redux.min.js',
@@ -51,7 +52,11 @@ const loaders = [
 if (DEBUG) {
   loaders.push({
     test: /\.css?$/,
-    loaders: ['style', 'css', 'postcss'],
+    loaders: [
+      'style',
+      'css',
+      'postcss',
+    ],
   });
 } else {
   plugins.push(new ExtractTextPlugin('./css/app.css'));
@@ -65,7 +70,10 @@ if (DEBUG) {
 
   loaders.push({
     test: /\.css?$/,
-    loader: ExtractTextPlugin.extract('style', ['css', 'postcss']),
+    loader: ExtractTextPlugin.extract('style', [
+      'css',
+      'postcss',
+    ]),
   });
 }
 
@@ -107,9 +115,14 @@ module.exports = {
       asImport({
         addDependencyTo: wp,
       }),
-      precss,
-      calc,
+      precss({
+        import: {
+          addDependencyTo: wp,
+        },
+      }),
       autoprefixer,
+      mqpacker,
+      cssnano,
     ];
   },
   externals: DEBUG ? {} : {

@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
-import cx from 'classnames';
+import 'paco-ui/css/illustration.css';
 
-class Illustration extends React.Component {
+class Illustration extends React.PureComponent {
   static propTypes = {
     image: PropTypes.string.isRequired,
     children: PropTypes.node.isRequired,
@@ -9,9 +9,9 @@ class Illustration extends React.Component {
   render() {
     const { image, children } = this.props;
     return (
-      <div className={cx('illustration')}>
+      <div className="illustration">
         <img src={image} role="presentation" />
-        <div className={cx('body')}>
+        <div className="body">
           {children}
         </div>
       </div>

@@ -5,7 +5,6 @@ import { push } from 'react-router-redux';
 
 import { changeTitle } from '../actions';
 
-import List from '../components/list';
 import Item from '../components/item';
 import Icon from '../components/icon';
 
@@ -121,7 +120,7 @@ export class Home extends React.Component {
   render() {
     return (
       <div className={cx('home')}>
-        <List>
+        <div>
           {components.sort((a, b) => {
             return a.name > b.name ? 1 : -1;
           }).map(({ name, path }, idx) => (
@@ -130,7 +129,7 @@ export class Home extends React.Component {
               onClick={this.onRowClick.bind(this, name, path)}
             />
           ))}
-        </List>
+        </div>
       </div>
     );
   }

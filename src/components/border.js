@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
-import cx from 'classnames';
+import 'paco-ui/css/border.css';
 
-class Border extends React.Component {
+class Border extends React.PureComponent {
   static propTypes = {
     position: PropTypes.oneOf([
       'left', 'right',
@@ -13,9 +13,8 @@ class Border extends React.Component {
   }
   render() {
     const { style, position, children } = this.props;
-    const className = cx(position ? `border-${position}` : 'border');
     return (
-      <div className={className} style={style}>
+      <div className={position ? `border-${position}` : 'border'} style={style}>
         {children}
       </div>
     );
