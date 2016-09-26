@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import cx from 'classnames';
 import 'paco-ui/css/tab.css';
 
 class Tab extends React.PureComponent {
@@ -12,7 +11,7 @@ class Tab extends React.PureComponent {
   render() {
     const { children, active, onClick, style } = this.props;
     return (
-      <div className={cx('tab', { active })} style={style} onClick={onClick}>
+      <div className={`tab ${active && 'active'}`} style={style} onClick={onClick}>
         {children}
       </div>
     );

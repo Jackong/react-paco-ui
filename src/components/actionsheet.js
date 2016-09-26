@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 import 'paco-ui/css/actionsheet.css';
-import cx from 'classnames';
 
 import Button from './button';
 import Mask from './mask';
@@ -17,8 +16,8 @@ class Actionsheet extends React.PureComponent {
     return (
       <div>
         <Mask onClick={onCancel} hide={hide} />
-        <div className={cx('actionsheet', { hide })}>
-          <div className={cx('tips')}>
+        <div className={`actionsheet ${hide && 'hide'}`}>
+          <div className="tips">
             {tips}
           </div>
           {children}

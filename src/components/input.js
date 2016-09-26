@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import cx from 'classnames';
 import 'paco-ui/css/input.css';
 
 class Input extends React.PureComponent {
@@ -47,12 +46,12 @@ class Input extends React.PureComponent {
   render() {
     const { label, placeholder, type, addons, onClick, disabled, readOnly, maxLength } = this.props;
     return (
-      <div className={cx('input-box')}>
+      <div className="input-box">
         {label && <label>{label}</label>}
         {addons.filter(addon => addon.props.left)}
         <input
           ref="input"
-          className={cx(type)}
+          className={type}
           type={type === 'number' ? 'text' : type}
           placeholder={placeholder}
           value={this.state.value}

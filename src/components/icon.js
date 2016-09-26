@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import cx from 'classnames';
 import 'paco-ui/css/icon.css';
 
 class Icon extends React.PureComponent {
@@ -12,7 +11,7 @@ class Icon extends React.PureComponent {
     const { name, highlight, onClick } = this.props;
     return (
       <i
-        className={cx('icon-wrapper', 'paco', `icon-${name}`, { highlight })}
+        className={`icon-wrapper paco icon-${name} ${highlight && 'highlight'}`}
         onClick={onClick}
       />
     );

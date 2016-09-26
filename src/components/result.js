@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import cx from 'classnames';
 import 'paco-ui/css/result.css';
 
 class Result extends React.PureComponent {
@@ -11,10 +10,10 @@ class Result extends React.PureComponent {
   render() {
     const { type, title, description } = this.props;
     return (
-      <div className={cx('result', type)}>
-        <i className={cx('icon', 'paco', `icon-${type}`)} />
-        <div className={cx('title')}>{title}</div>
-        <div className={cx('description')}>{description}</div>
+      <div className={`result ${type}`}>
+        <i className={`icon paco icon-${type}`} />
+        <div className="title">{title}</div>
+        <div className="description">{description}</div>
       </div>
     );
   }

@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import cx from 'classnames';
 import 'paco-ui/css/plate.css';
 
 class Plate extends React.PureComponent {
@@ -10,7 +9,7 @@ class Plate extends React.PureComponent {
   render() {
     const { onClick, children } = this.props;
     return (
-      <span className={cx('plate')} onClick={onClick}>
+      <span className="plate" onClick={onClick}>
         {children}
       </span>
     );

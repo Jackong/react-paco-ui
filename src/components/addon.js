@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import cx from 'classnames';
 import 'paco-ui/css/addon.css';
 
 class Addon extends React.PureComponent {
@@ -11,7 +10,7 @@ class Addon extends React.PureComponent {
   render() {
     const { children, left, onClick } = this.props;
     return (
-      <span className={cx('addon', { left })} onClick={onClick}>
+      <span className={`addon ${left && 'left'}`} onClick={onClick}>
         {children}
       </span>
     );

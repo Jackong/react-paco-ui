@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import cx from 'classnames';
 import 'paco-ui/css/checkbox.css';
 
 class CheckBox extends React.PureComponent {
@@ -30,9 +29,9 @@ class CheckBox extends React.PureComponent {
     const { checked } = this.state;
     const { children } = this.props;
     return (
-      <span className={cx('checkbox')} onClick={this.onToggle.bind(this)}>
+      <span className="checkbox" onClick={this.onToggle.bind(this)}>
         <input type="checkbox" checked={checked} onChange={this.onToggle.bind(this)} />
-        <i className={cx('paco', 'icon', checked ? 'icon-right' : 'icon-circle')} />
+        <i className={`paco icon ${checked ? 'icon-right' : 'icon-circle'}`} />
         <span>{children}</span>
       </span>
     );

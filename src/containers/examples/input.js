@@ -70,7 +70,7 @@ class Component extends React.Component {
         />
         <br />
         <Input
-          type="number"
+          type="number" maxLength={6}
           label="校验码" placeholder="输入校验码" addons={[
             <Addon key="verification" onClick={this.onSMSCaptcha.bind(this)}>
               <Captcha>
@@ -81,7 +81,7 @@ class Component extends React.Component {
         />
         <br />
         <Input
-          type="number"
+          type="number" maxLength={6}
           label="校验码" placeholder="输入校验码" addons={[
             <Addon key="verification" onClick={this.onImageCaptcha.bind(this)}>
               <Captcha>

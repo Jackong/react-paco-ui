@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import cx from 'classnames';
 import 'paco-ui/css/modal.css';
 
 import Button from './button';
@@ -32,11 +31,11 @@ class Modal extends React.PureComponent {
     return (
       <div>
         <Mask onClick={this.onClose.bind(this)} hide={!isShow} />
-        <div className={cx('modal', { hide: !isShow })}>
-          <i onClick={this.onClose.bind(this)} className={cx('close', 'paco', 'icon-close')} />
-          <img className={cx('image')} src={image} role="presentation" />
-          <div className={cx('desc')}>{desc}</div>
-          <div className={cx('desc')}>{tips}</div>
+        <div className={`modal ${!isShow && 'hide'}`}>
+          <i onClick={this.onClose.bind(this)} className="close paco icon-close" />
+          <img className="image" src={image} role="presentation" />
+          <div className="desc">{desc}</div>
+          <div className="desc">{tips}</div>
           <Button onClick={this.onOK.bind(this)} type="primary">{btn}</Button>
         </div>
       </div>

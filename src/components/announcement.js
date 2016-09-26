@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import cx from 'classnames';
 import 'paco-ui/css/announcement.css';
 
 const types = {
@@ -28,9 +27,9 @@ class Announcement extends React.PureComponent {
     const { type, link, onClose } = this.props;
     const icon = icons[type];
     return (
-      <a className={cx('announcement', { hide: !this.props.children })} href={link}>
-        <i className={cx('paco', icon, { icon })} onClick={onClose || (() => {})} />
-        <span className={cx('message')}>
+      <a className={`announcement ${!this.props.children && 'hide'}`} href={link}>
+        <i className={`paco ${icon} ${icon && 'icon'}`} onClick={onClose || (() => {})} />
+        <span className="message">
           {this.props.children}
         </span>
       </a>

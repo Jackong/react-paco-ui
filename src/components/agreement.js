@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import cx from 'classnames';
 import 'paco-ui/css/agreement.css';
 
 class Agreement extends React.PureComponent {
@@ -8,7 +7,7 @@ class Agreement extends React.PureComponent {
   }
   render() {
     return (
-      <div className={cx('agreement')}>
+      <div className="agreement">
         {this.props.children}
       </div>
     );

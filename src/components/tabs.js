@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import cx from 'classnames';
 import 'paco-ui/css/tab.css';
 
 const types = {
@@ -20,7 +19,7 @@ class Tabs extends React.PureComponent {
   render() {
     const { type, children, style } = this.props;
     return (
-      <div className={cx('tabs', type, `col-${children.length}`)} style={style}>
+      <div className={`tabs ${type} col-${children.length}`} style={style}>
         {children}
       </div>
     );

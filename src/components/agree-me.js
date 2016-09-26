@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import cx from 'classnames';
 import 'paco-ui/css/agreement.css';
 
 import CheckBox from './checkbox';
@@ -14,7 +13,7 @@ class AgreeMe extends React.PureComponent {
   render() {
     const { children } = this.props;
     return (
-      <span className={cx('agree-it')}>
+      <span className="agree-it">
         <CheckBox ref="checkbox" checked>
           同意{children}
         </CheckBox>

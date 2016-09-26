@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 import 'paco-ui/css/navbar.css';
-import cx from 'classnames';
 
 class Navbar extends React.PureComponent {
   static propTypes = {
@@ -13,11 +12,11 @@ class Navbar extends React.PureComponent {
   render() {
     const { left, onLeft, children, right, onRight } = this.props;
     return (
-      <div className={cx('navbar-wrapper')}>
-        <div className={cx('navbar')}>
-          {left && <div className={cx('left')} onClick={onLeft}>{left}</div>}
-          <div className={cx('title')}>{children}</div>
-          {right && <div className={cx('right')} onClick={onRight}>{right}</div>}
+      <div className="navbar-wrapper">
+        <div className="navbar">
+          {left && <div className="left" onClick={onLeft}>{left}</div>}
+          <div className="title">{children}</div>
+          {right && <div className="right" onClick={onRight}>{right}</div>}
         </div>
       </div>
     );

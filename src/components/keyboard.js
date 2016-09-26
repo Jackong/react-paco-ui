@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import cx from 'classnames';
 import 'paco-ui/css/keyboard.css';
 
 import Mask from './mask';
@@ -53,10 +52,10 @@ class Keyboard extends React.PureComponent {
   }
   keys(allKeys, onClick) {
     return allKeys.map((keys, row) => (
-      <div key={row} className={cx('keys')}>
+      <div key={row} className="keys">
         {keys.map((key, col) => {
           let name = key;
-          let clz = '';
+          let clz = [];
           let disabled = this.props.type === 'city' && ['I', 'O'].indexOf(key) >= 0;
           if (typeof key === 'object') {
             name = key.name;
@@ -66,7 +65,7 @@ class Keyboard extends React.PureComponent {
           return (
             <button
               key={col}
-              className={cx('key', clz)}
+              className={`key ${clz && clz.join(' ')}`}
               disabled={disabled}
               onClick={() => onClick(key)}
             >
@@ -93,7 +92,7 @@ class Keyboard extends React.PureComponent {
     return (
       <div>
         <Mask onClick={onCancel} hide={hide} transparent />
-        <div className={cx('keyboard', { hide })}>
+        <div className={`keyboard ${hide && 'hide'}`}>
           {this[type].call(this)}
         </div>
       </div>

@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import cx from 'classnames';
 import 'paco-ui/css/button.css';
 
 class Button extends React.PureComponent {
@@ -15,7 +14,7 @@ class Button extends React.PureComponent {
     return (
       <button
         onClick={!disabled && onClick}
-        className={cx('btn', type)}
+        className={`btn ${type}`}
         disabled={disabled}
         style={style}
       >

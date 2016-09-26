@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 import 'paco-ui/css/ad.css';
-import cx from 'classnames';
 
 import Button from './button';
 
@@ -34,14 +33,14 @@ class Ad extends React.PureComponent {
     const { logo, title, description, link, style, closable } = this.props;
     const { hide } = this.state;
     return (
-      <a href={link} className={cx('ad', { hide })} style={style}>
-        <img className={cx('logo')} src={logo} role="presentation" />
-        <div className={cx('content')}>
-          <div className={cx('title')}>{title}</div>
-          <div className={cx('desc')}>{description}</div>
+      <a href={link} className={`ad ${hide && 'hide'}`} style={style}>
+        <img className="logo" src={logo} role="presentation" />
+        <div className="content">
+          <div className="title">{title}</div>
+          <div className="desc">{description}</div>
         </div>
         {closable ? (
-          <i onClick={this.onClose.bind(this)} className={cx('close', 'paco', 'icon-close')} />
+          <i onClick={this.onClose.bind(this)} className="close paco icon-close" />
         ) : (
           <Button type="primary">点击下载</Button>
         )}

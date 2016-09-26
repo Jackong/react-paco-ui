@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 import 'paco-ui/css/text.css';
-import cx from 'classnames';
 
 class Text extends React.PureComponent {
   static propTypes = {
@@ -10,7 +9,7 @@ class Text extends React.PureComponent {
   render() {
     const { type, children } = this.props;
     return (
-      <div className={cx(type)}>{children}</div>
+      <div className={type}>{children}</div>
     );
   }
 }

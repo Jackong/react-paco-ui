@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import cx from 'classnames';
 import 'paco-ui/css/card.css';
 
 class Card extends React.PureComponent {
@@ -14,31 +13,31 @@ class Card extends React.PureComponent {
   render() {
     const { header, title, image, content, tips, link } = this.props;
     return (
-      <div className={cx('card', { thumbnail: !!image })}>
-        <div className={cx('header')}>
+      <div className={`card ${!!image && 'thumbnail'}`}>
+        <div className="header">
           {header}
         </div>
-        <div className={cx('body')}>
-          <div className={cx('title')}>
+        <div className="body">
+          <div className="title">
             {title}
           </div>
           {image && (
-            <div className={cx('tips')}>
+            <div className="tips">
               {tips}
             </div>
           )}
           {image && (
-            <img src={image} className={cx('image')} role="presentation" />
+            <img src={image} className="image" role="presentation" />
           )}
-          <div className={cx('content')}>
+          <div className="content">
             {content}
           </div>
           {!image && (
-            <div className={cx('tips')}>
+            <div className="tips">
               {tips}
             </div>
           )}
-          <div className={cx('link')}>
+          <div className="link">
             {link}
           </div>
         </div>
