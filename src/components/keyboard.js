@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import cx from 'classnames';
+import 'paco-ui/css/keyboard.css';
 
 import Mask from './mask';
 
@@ -26,7 +26,7 @@ const codes = [
   ],
 ];
 
-class Keyboard extends React.Component {
+class Keyboard extends React.PureComponent {
   static propTypes = {
     onKey: PropTypes.func.isRequired,
     onDel: PropTypes.func.isRequired,
@@ -52,10 +52,10 @@ class Keyboard extends React.Component {
   }
   keys(allKeys, onClick) {
     return allKeys.map((keys, row) => (
-      <div key={row} className={cx('keys')}>
+      <div key={row} className="keys">
         {keys.map((key, col) => {
           let name = key;
-          let clz = '';
+          let clz = [];
           let disabled = this.props.type === 'city' && ['I', 'O'].indexOf(key) >= 0;
           if (typeof key === 'object') {
             name = key.name;
@@ -63,13 +63,14 @@ class Keyboard extends React.Component {
             disabled = key.disabled || (this.props.type === 'city' && key === del);
           }
           return (
-            <span
+            <button
               key={col}
-              className={cx('key', clz, { disabled })}
+              className={`key ${clz && clz.join(' ')}`}
+              disabled={disabled}
               onClick={() => onClick(key)}
             >
               {name}
-            </span>
+            </button>
           );
         })}
       </div>
@@ -91,7 +92,7 @@ class Keyboard extends React.Component {
     return (
       <div>
         <Mask onClick={onCancel} hide={hide} transparent />
-        <div className={cx('keyboard', { hide })}>
+        <div className={`keyboard ${hide && 'hide'}`}>
           {this[type].call(this)}
         </div>
       </div>

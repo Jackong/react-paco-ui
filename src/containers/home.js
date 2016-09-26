@@ -5,8 +5,8 @@ import { push } from 'react-router-redux';
 
 import { changeTitle } from '../actions';
 
-import List from '../components/list';
-import Row from '../components/row';
+import Item from '../components/item';
+import Icon from '../components/icon';
 
 const components = [
   {
@@ -120,18 +120,16 @@ export class Home extends React.Component {
   render() {
     return (
       <div className={cx('home')}>
-        <List>
+        <div>
           {components.sort((a, b) => {
             return a.name > b.name ? 1 : -1;
           }).map(({ name, path }, idx) => (
-            <Row
-              type="single" key={idx} icon="arrow-right"
+            <Item
+              type="single" key={idx} title={name} icon={<Icon name="arrow-right" />}
               onClick={this.onRowClick.bind(this, name, path)}
-            >
-              {name}
-            </Row>
+            />
           ))}
-        </List>
+        </div>
       </div>
     );
   }

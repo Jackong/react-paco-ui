@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import cx from 'classnames';
+import 'paco-ui/css/toast.css';
 
 const types = {
   SUCCESS: 'success',
@@ -8,7 +8,13 @@ const types = {
   LOADING: 'loading',
 };
 
-class Toast extends React.Component {
+const icons = {
+  [types.SUCCESS]: 'right-o',
+  [types.FAIL]: 'wrong-o',
+  [types.OPPS]: 'opps',
+};
+
+class Toast extends React.PureComponent {
   static propTypes = {
     children: PropTypes.node,
     style: PropTypes.object,
@@ -21,9 +27,9 @@ class Toast extends React.Component {
   render() {
     const { style, children, type } = this.props;
     return (
-      <div className={cx('toast', { hide: !children })} style={style}>
-        <div className={cx('icon', type)}></div>
-        <p className={cx('message')}>{children}</p>
+      <div className={`toast ${!children && 'hide'}`} style={style}>
+        <i className={`paco icon ${type} icon-${icons[type]}`} />
+        <p className="message">{children}</p>
       </div>
     );
   }

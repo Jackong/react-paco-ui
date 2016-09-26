@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
-import cx from 'classnames';
+import 'paco-ui/css/input.css';
 
-class Input extends React.Component {
+class Input extends React.PureComponent {
   static propTypes = {
     label: PropTypes.string,
     placeholder: PropTypes.string,
@@ -19,15 +19,15 @@ class Input extends React.Component {
   }
   constructor(props) {
     super(props);
-    this.state = { value: props.value };
+    this.state = { value: props.value || '' };
   }
   componentWillReceiveProps(props) {
-    if (props.value !== this.state.value) {
-      this.setState({ value: props.value });
+    if (props.value !== this.props.value) {
+      this.setState({ value: props.value || '' });
     }
   }
   onChange(e) {
-    const { onChange, type } = this.props;
+    const { onChange, type, maxLength } = this.props;
     if (onChange) {
       onChange(e);
     }
@@ -35,10 +35,10 @@ class Input extends React.Component {
     if (type === 'number' && !/^[0-9]{0,}$/.test(value)) {
       return;
     }
-    this.setState({ value });
+    this.setState({ value: maxLength ? value.substr(0, maxLength) : value });
   }
   clear() {
-    this.setState({ value: null });
+    this.setState({ value: '' });
   }
   value() {
     return this.state.value;
@@ -46,12 +46,12 @@ class Input extends React.Component {
   render() {
     const { label, placeholder, type, addons, onClick, disabled, readOnly, maxLength } = this.props;
     return (
-      <div className={cx('input-box')}>
-        <label className={cx({ hide: !label })}>{label}</label>
+      <div className="input-box">
+        {label && <label>{label}</label>}
         {addons.filter(addon => addon.props.left)}
         <input
           ref="input"
-          className={cx(type)}
+          className={type}
           type={type === 'number' ? 'text' : type}
           placeholder={placeholder}
           value={this.state.value}

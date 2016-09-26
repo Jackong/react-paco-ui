@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react';
-import cx from 'classnames';
+import 'paco-ui/css/agreement.css';
 
 import CheckBox from './checkbox';
 
-class AgreeMe extends React.Component {
+class AgreeMe extends React.PureComponent {
   static propTypes = {
     children: PropTypes.node.isRequired,
   }
@@ -13,9 +13,10 @@ class AgreeMe extends React.Component {
   render() {
     const { children } = this.props;
     return (
-      <span className={cx('agree-it')}>
-        <CheckBox ref="checkbox" checked>同意</CheckBox>
-        {children}
+      <span className="agree-it">
+        <CheckBox ref="checkbox" checked>
+          同意{children}
+        </CheckBox>
       </span>
     );
   }

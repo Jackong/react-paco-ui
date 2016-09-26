@@ -1,8 +1,9 @@
 import React, { PropTypes } from 'react';
+import 'paco-ui/css/toast.css';
 
 import Toast from './toast';
 
-class Loading extends React.Component {
+class Loading extends React.PureComponent {
   static propTypes = {
     loading: PropTypes.bool,
     children: PropTypes.node,

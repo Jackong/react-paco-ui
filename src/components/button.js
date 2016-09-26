@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
-import cx from 'classnames';
+import 'paco-ui/css/button.css';
 
-class Button extends React.Component {
+class Button extends React.PureComponent {
   static propTypes = {
     children: PropTypes.node.isRequired,
     style: PropTypes.object,
@@ -9,37 +9,13 @@ class Button extends React.Component {
     type: PropTypes.oneOf(['primary', 'secondary', 'warning', 'outline', 'bottom']),
     disabled: PropTypes.bool,
   }
-  constructor(props) {
-    super(props);
-    this.state = {
-      active: false,
-    };
-  }
-  onTouchStart() {
-    this.setState({
-      active: true,
-    });
-  }
-  onTouchEnd() {
-    this.setState({
-      active: false,
-    });
-  }
-  onTouchCancel() {
-    this.setState({
-      active: false,
-    });
-  }
   render() {
     const { style, children, type, disabled, onClick } = this.props;
-    const { active } = this.state;
     return (
       <button
-        onTouchStart={this.onTouchStart.bind(this)}
-        onTouchEnd={this.onTouchEnd.bind(this)}
-        onTouchCancel={this.onTouchCancel.bind(this)}
         onClick={!disabled && onClick}
-        className={cx('btn', type, { disabled, active })}
+        className={`btn ${type}`}
+        disabled={disabled}
         style={style}
       >
         {children}

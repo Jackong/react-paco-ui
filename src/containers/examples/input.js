@@ -13,16 +13,22 @@ class Component extends React.Component {
       image: 'http://placehold.it/128x64?text=21389',
     };
   }
+  componentWillUnmount() {
+    clearInterval(this.intervalId);
+  }
   onClear(ref) {
     this.refs[ref].clear();
   }
   onSMSCaptcha() {
+    if (this.state.waiting > 0) {
+      return;
+    }
     this.setState({ waiting: 59 });
-    const intervalId = setInterval(() => {
+    this.intervalId = setInterval(() => {
       const waiting = this.state.waiting - 1;
       this.setState({ waiting });
       if (waiting <= 0) {
-        clearInterval(intervalId);
+        clearInterval(this.intervalId);
       }
     }, 1000);
   }
@@ -64,7 +70,7 @@ class Component extends React.Component {
         />
         <br />
         <Input
-          type="number"
+          type="number" maxLength={6}
           label="校验码" placeholder="输入校验码" addons={[
             <Addon key="verification" onClick={this.onSMSCaptcha.bind(this)}>
               <Captcha>
@@ -75,7 +81,7 @@ class Component extends React.Component {
         />
         <br />
         <Input
-          type="number"
+          type="number" maxLength={6}
           label="校验码" placeholder="输入校验码" addons={[
             <Addon key="verification" onClick={this.onImageCaptcha.bind(this)}>
               <Captcha>

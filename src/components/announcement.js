@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import cx from 'classnames';
+import 'paco-ui/css/announcement.css';
 
 const types = {
   NORMAL: 'normal',
@@ -12,7 +12,7 @@ const icons = {
   [types.CLOSE]: 'icon-close',
 };
 
-class Announcement extends React.Component {
+class Announcement extends React.PureComponent {
   static propTypes = {
     children: PropTypes.node,
     type: PropTypes.oneOf([types.NORMAL, types.LINK, types.CLOSE]),
@@ -27,13 +27,11 @@ class Announcement extends React.Component {
     const { type, link, onClose } = this.props;
     const icon = icons[type];
     return (
-      <a className={cx('announcement-wrapper', { hide: !this.props.children })} href={link}>
-        <div className={cx('announcement')}>
-          <i className={cx('paco', icon, { icon })} onClick={onClose || (() => {})} />
-          <span className={cx('message')}>
-            {this.props.children}
-          </span>
-        </div>
+      <a className={`announcement ${!this.props.children && 'hide'}`} href={link}>
+        <i className={`paco ${icon} ${icon && 'icon'}`} onClick={onClose || (() => {})} />
+        <span className="message">
+          {this.props.children}
+        </span>
       </a>
     );
   }

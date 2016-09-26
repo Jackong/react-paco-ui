@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
-import cx from 'classnames';
+import 'paco-ui/css/plate.css';
 
-class Plate extends React.Component {
+class Plate extends React.PureComponent {
   static propTypes = {
     children: PropTypes.node,
     onClick: PropTypes.func,
@@ -9,7 +9,7 @@ class Plate extends React.Component {
   render() {
     const { onClick, children } = this.props;
     return (
-      <span className={cx('plate')} onClick={onClick}>
+      <span className="plate" onClick={onClick}>
         {children}
       </span>
     );

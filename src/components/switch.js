@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
-import cx from 'classnames';
+import 'paco-ui/css/switch.css';
 
-class Switch extends React.Component {
+class Switch extends React.PureComponent {
   static propTypes = {
     isOpen: PropTypes.bool,
     onToggle: PropTypes.func,
@@ -12,12 +12,12 @@ class Switch extends React.Component {
   render() {
     const { isOpen, onToggle } = this.props;
     return (
-      <span className={cx('switch')}>
+      <span className="switch">
         <input
           ref="switch" type="checkbox"
           defaultChecked={isOpen} onChange={e => onToggle && onToggle(e.target.checked)}
         />
-        <div className={cx('slider')}></div>
+        <div className="slider"></div>
       </span>
     );
   }

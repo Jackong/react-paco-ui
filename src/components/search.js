@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react';
-import cx from 'classnames';
+import 'paco-ui/css/search.css';
 
 import Mask from './mask';
 
-class Search extends React.Component {
+class Search extends React.PureComponent {
   static propTypes = {
     placeholder: PropTypes.string,
   }
@@ -31,24 +31,27 @@ class Search extends React.Component {
     const { placeholder } = this.props;
     const { focus } = this.state;
     return (
-      <div className={cx('search-wrapper', { focus })}>
+      <div>
         <Mask hide={!focus} onClick={this.onCancel.bind(this)} />
-        <div className={cx('search')}>
-          <div className={cx('input')}>
+        <div className={`search ${focus && 'focus'}`}>
+          <div className="input">
             <input
               ref="search"
               type="search" required
               onFocus={this.onFocus.bind(this)}
             />
             <span className={'placeholder'} onClick={() => this.refs.search.focus()}>
-              <i className={cx('paco', 'icon-search')} />
-              <span className={cx('text')}>{placeholder}</span>
+              <i className="icon paco icon-search" />
+              <span className="text">{placeholder}</span>
             </span>
-            <i className={cx('clear', 'paco', 'icon-wrong')} onClick={this.onClear.bind(this)} />
+            <i
+              className="icon clear paco icon-wrong"
+              onClick={this.onClear.bind(this)}
+            />
           </div>
           <span
             onClick={this.onCancel.bind(this)}
-            className={cx('cancel')}
+            className="cancel"
           >
             取消
           </span>

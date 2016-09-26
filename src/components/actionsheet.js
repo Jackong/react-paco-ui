@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react';
-import cx from 'classnames';
+import 'paco-ui/css/actionsheet.css';
 
 import Button from './button';
 import Mask from './mask';
 
-class Actionsheet extends React.Component {
+class Actionsheet extends React.PureComponent {
   static propTypes = {
     tips: PropTypes.string,
     children: PropTypes.node.isRequired,
@@ -14,10 +14,10 @@ class Actionsheet extends React.Component {
   render() {
     const { tips, children, hide, onCancel } = this.props;
     return (
-      <div className={cx('actionsheet-wrapper', { hide })}>
-        <Mask onClick={onCancel} />
-        <div className={cx('actionsheet')}>
-          <div className={cx('tips')}>
+      <div>
+        <Mask onClick={onCancel} hide={hide} />
+        <div className={`actionsheet ${hide && 'hide'}`}>
+          <div className="tips">
             {tips}
           </div>
           {children}
