@@ -63,14 +63,14 @@ class Keyboard extends React.PureComponent {
             disabled = key.disabled || (this.props.type === 'city' && key === del);
           }
           return (
-            <button
+            <a
               key={col}
-              className={`key ${clz && clz.join(' ')}`}
+              className={`key ${clz ? clz.join(' ') : ''} ${disabled && 'disabled'}`}
               disabled={disabled}
               onClick={() => onClick(key)}
             >
               {name}
-            </button>
+            </a>
           );
         })}
       </div>
