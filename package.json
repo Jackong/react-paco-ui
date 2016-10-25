@@ -13,6 +13,7 @@
   },
   "peerDependencies": {
     "react": "^15.3.2",
+    "react-waypoint": "^4.0.2",
     "paco-ui": "^1.0.8"
   },
   "devDependencies": {
