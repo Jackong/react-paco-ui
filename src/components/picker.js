@@ -6,126 +6,136 @@ import Button from './button';
 import Mask from './mask';
 
 const OFFSET = `${100 / 3}%`;
-const DELAY = 300;
+const DELAY_MOUNT = 300;
+const DELAY_SCROLL = 2400;
+const UNITS = {
+  year: '年',
+  month: '月',
+  date: '日',
+};
 
 class Picker extends React.Component {
   static propTypes = {
+    from: PropTypes.number.isRequired,
+    to: PropTypes.number.isRequired,
+    value: PropTypes.instanceOf(Date),
     onOK: PropTypes.func.isRequired,
     onCancel: PropTypes.func.isRequired,
   }
+  static defaultProps = {
+    value: new Date(),
+  }
+  static toString(d) {
+    const year = d.getFullYear();
+    const month = d.getMonth() + 1;
+    const date = d.getDate();
+    return `${year}-${month < 10 ? '0' : ''}${month}-${date < 10 ? '0' : ''}${date}`;
+  }
   constructor(props) {
     super(props);
-    const date = new Date();
+    const { value } = props;
     this.state = {
-      year: date.getFullYear(),
-      month: date.getMonth(),
-      date: date.getDate(),
+      year: value.getFullYear(),
+      month: value.getMonth() + 1,
+      date: value.getDate(),
     };
+    this.timer = null;
   }
   componentDidMount() {
     setTimeout(() => {
       this.setState({ isMounted: true });
-    }, DELAY);
+    }, DELAY_MOUNT);
   }
-  onEnterYear(year) {
-    this.setState({ year });
+  componentWillUnmount() {
+    clearTimeout(this.timer);
   }
-  onEnterMonth(month) {
-    this.setState({ month });
+  onEnter(key, value, e) {
+    if (!e.event) {
+      const selected = document.querySelector(`.${key}.selected`);
+      if (!selected) {
+        return;
+      }
+      selected.previousSibling.scrollIntoView();
+      return;
+    }
+    this.setState({
+      [key]: value,
+    });
+    const timer = setTimeout(() => {
+      clearTimeout(this.timer);
+      this.timer = timer;
+      const selected = document.querySelector(`.${key}.selected`);
+      if (!selected) {
+        return;
+      }
+      selected.previousSibling.scrollIntoView();
+    }, DELAY_SCROLL);
   }
-  onEnterDate(date) {
-    this.setState({ date });
+  onOK() {
+    this.props.onOK(this.value());
   }
-  placeholder() {
+  value() {
+    const { year, month, date } = this.state;
+    return new Date(year, month - 1, date);
+  }
+  waypoints(from, to, name) {
+    const { isMounted } = this.state;
+    const value = this.state[name];
+    const waypoints = [];
+    for (let i = from; i < to; i++) {
+      const selected = i === value;
+      waypoints.push(
+        <div
+          key={i}
+          className={`row ${name} ${selected && 'selected'}`}
+        >
+          {i}{UNITS[name]}
+          {isMounted && (
+            <Waypoint
+              onEnter={this.onEnter.bind(this, name, i)}
+              topOffset={OFFSET} bottomOffset={OFFSET}
+            />
+          )}
+        </div>
+      );
+    }
     return (
-      <div className="row"></div>
+      <div className="col">
+        <div className="row"></div>
+        {waypoints}
+        <div className="row"></div>
+      </div>
     );
   }
   years() {
-    const { isMounted, year } = this.state;
-    const years = [];
-    const date = new Date();
-    for (let i = date.getFullYear() - 10, l = date.getFullYear() + 10; i < l; i++) {
-      years.push(
-        <div key={i} className={`row ${i === year ? 'selected' : ''}`}>
-          {i}年
-          {isMounted && (
-            <Waypoint
-              onEnter={this.onEnterYear.bind(this, i)}
-              topOffset={OFFSET} bottomOffset={OFFSET}
-            />
-          )}
-        </div>
-      );
-    }
-    return years;
+    const { from, to } = this.props;
+    return this.waypoints(from, to, 'year');
   }
   months() {
-    const { isMounted, month } = this.state;
-    const months = [];
-    for (let i = 0; i < 12; i++) {
-      months.push(
-        <div key={i} className={`row ${i === month ? 'selected' : ''}`}>
-          {i + 1}月
-          {isMounted && (
-            <Waypoint
-              onEnter={this.onEnterMonth.bind(this, i)}
-              topOffset={OFFSET} bottomOffset={OFFSET}
-            />
-          )}
-        </div>
-      );
-    }
-    return months;
+    return this.waypoints(1, 13, 'month');
   }
   dates() {
-    const { isMounted, year, month, date } = this.state;
-    const dates = [];
-    const days = (new Date(year, month + 1, 1)
-      - new Date(year, month, 1)) / (1000 * 60 * 60 * 24);
-    for (let i = 1, l = days + 1; i < l; i++) {
-      dates.push(
-        <div key={i} className={`row ${i === date ? 'selected' : ''}`} >
-          {i}日
-          {isMounted && (
-            <Waypoint
-              onEnter={this.onEnterDate.bind(this, i)}
-              topOffset={OFFSET} bottomOffset={OFFSET}
-            />
-          )}
-        </div>
-      );
-    }
-    return dates;
+    const { year, month } = this.state;
+    const days = (new Date(year, month, 1)
+      - new Date(year, month - 1, 1)) / (1000 * 60 * 60 * 24);
+    return this.waypoints(1, days + 1, 'date');
   }
   render() {
-    const { onOK, onCancel } = this.props;
+    const { onCancel } = this.props;
     return (
       <div>
-        <Mask />
+        <Mask onClick={onCancel} />
         <div className="picker">
           <div className="header">选择日期</div>
           <div className="body">
             <div className="mirror"></div>
-            <div className="col">
-              {this.placeholder()}
-              {this.years()}
-              {this.placeholder()}
-            </div>
-            <div className="col">
-              {this.placeholder()}
-              {this.months()}
-              {this.placeholder()}
-            </div>
-            <div className="col">
-              {this.placeholder()}
-              {this.dates()}
-              {this.placeholder()}
-            </div>
+            {this.years()}
+            {this.months()}
+            {this.dates()}
           </div>
           <div className="btn-group">
-            <Button type="secondary" onClick={onOK}>取消</Button>
-            <Button type="secondary" onClick={onCancel}>确定</Button>
+            <Button type="secondary" onClick={onCancel}>取消</Button>
+            <Button type="secondary" onClick={this.onOK.bind(this)}>确定</Button>
           </div>
         </div>
       </div>
