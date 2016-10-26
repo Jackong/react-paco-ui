@@ -30,6 +30,7 @@ import Illustration from './examples/illustration';
 import Actionsheet from './examples/actionsheet';
 import Result from './examples/result';
 import Keyboard from './examples/keyboard';
+import Picker from './examples/picker';
 
 const history = syncHistoryWithStore(hashHistory, store);
 
@@ -69,6 +70,7 @@ class Root extends React.Component {
                 <Route path="actionsheet" component={Actionsheet} />
                 <Route path="result" component={Result} />
                 <Route path="keyboard" component={Keyboard} />
+                <Route path="picker" component={Picker} />
               </Route>
             </Route>
           </Router>
