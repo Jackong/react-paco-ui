@@ -7,7 +7,7 @@ import Mask from './mask';
 
 const OFFSET = `${100 / 3}%`;
 const DELAY_MOUNT = 300;
-const DELAY_SCROLL = 2400;
+const DELAY_SCROLL = 1000;
 const UNITS = {
   year: '年',
   month: '月',
@@ -39,7 +39,6 @@ class Picker extends React.Component {
       month: value.getMonth() + 1,
       date: value.getDate(),
     };
-    this.timer = null;
   }
   componentDidMount() {
     setTimeout(() => {
@@ -50,6 +49,8 @@ class Picker extends React.Component {
     clearTimeout(this.timer);
   }
   onEnter(key, value, e) {
+    clearTimeout(this.timer);
+    clearTimeout(this.tid);
     if (!e.event) {
       const selected = document.querySelector(`.${key}.selected`);
       if (!selected) {
@@ -58,12 +59,10 @@ class Picker extends React.Component {
       selected.previousSibling.scrollIntoView();
       return;
     }
-    this.setState({
-      [key]: value,
-    });
-    const timer = setTimeout(() => {
-      clearTimeout(this.timer);
-      this.timer = timer;
+    this.timer = setTimeout(() => {
+      this.setState({
+        [key]: value,
+      });
       const selected = document.querySelector(`.${key}.selected`);
       if (!selected) {
         return;
@@ -79,7 +78,6 @@ class Picker extends React.Component {
     return new Date(year, month - 1, date);
   }
   waypoints(from, to, name) {
-    const { isMounted } = this.state;
     const value = this.state[name];
     const waypoints = [];
     for (let i = from; i < to; i++) {
@@ -90,12 +88,10 @@ class Picker extends React.Component {
           className={`row ${name} ${selected && 'selected'}`}
         >
           {i}{UNITS[name]}
-          {isMounted && (
-            <Waypoint
-              onEnter={this.onEnter.bind(this, name, i)}
-              topOffset={OFFSET} bottomOffset={OFFSET}
-            />
-          )}
+          <Waypoint
+            onEnter={this.onEnter.bind(this, name, i)}
+            topOffset={OFFSET} bottomOffset={OFFSET}
+          />
         </div>
       );
     }
@@ -122,6 +118,7 @@ class Picker extends React.Component {
   }
   render() {
     const { onCancel } = this.props;
+    const { isMounted } = this.state;
     return (
       <div>
         <Mask onClick={onCancel} />
@@ -129,9 +126,9 @@ class Picker extends React.Component {
           <div className="header">选择日期</div>
           <div className="body">
             <div className="mirror"></div>
-            {this.years()}
-            {this.months()}
-            {this.dates()}
+            {isMounted && this.years()}
+            {isMounted && this.months()}
+            {isMounted && this.dates()}
           </div>
           <div className="btn-group">
             <Button type="secondary" onClick={onCancel}>取消</Button>
