@@ -105,6 +105,10 @@ const components = [
     name: 'Keyboard',
     path: 'examples/keyboard',
   },
+  {
+    name: 'Picker',
+    path: 'examples/picker',
+  },
 ];
 
 @connect()
