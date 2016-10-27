@@ -5,9 +5,10 @@ import 'paco-ui/css/picker.css';
 import Button from './button';
 import Mask from './mask';
 
+const isAndroid = /android/i.test(window.navigator.userAgent);
 const OFFSET = `${100 / 3}%`;
 const DELAY_MOUNT = 300;
-const DELAY_SCROLL = 1000;
+const DELAY_SCROLL = isAndroid ? 700 : 1000;
 const UNITS = {
   year: '年',
   month: '月',
@@ -50,7 +51,6 @@ class Picker extends React.Component {
   }
   onEnter(key, value, e) {
     clearTimeout(this.timer);
-    clearTimeout(this.tid);
     if (!e.event) {
       const selected = document.querySelector(`.${key}.selected`);
       if (!selected) {
@@ -59,10 +59,17 @@ class Picker extends React.Component {
       selected.previousSibling.scrollIntoView();
       return;
     }
-    this.timer = setTimeout(() => {
+    if (!isAndroid) {
       this.setState({
         [key]: value,
       });
+    }
+    this.timer = setTimeout(() => {
+      if (isAndroid) {
+        this.setState({
+          [key]: value,
+        });
+      }
       const selected = document.querySelector(`.${key}.selected`);
       if (!selected) {
         return;
@@ -84,11 +91,12 @@ class Picker extends React.Component {
       const selected = i === value;
       waypoints.push(
         <div
-          key={i}
+          key={`${name}-${i}`}
           className={`row ${name} ${selected && 'selected'}`}
         >
           {i}{UNITS[name]}
           <Waypoint
+            fireOnRapidScroll
             onEnter={this.onEnter.bind(this, name, i)}
             topOffset={OFFSET} bottomOffset={OFFSET}
           />
