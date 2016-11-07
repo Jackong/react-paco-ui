@@ -1,6 +1,6 @@
 {
   "name": "react-paco-ui",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "author": "jackong",
   "scripts": {
     "start": "cross-env MOCK_API=/api* NODE_ENV=development PORT=3000 node server.js",
@@ -14,7 +14,7 @@
   "peerDependencies": {
     "react": "^15.3.2",
     "react-waypoint": "^4.0.2",
-    "paco-ui": "^1.0.10"
+    "paco-ui": "^1.0.13"
   },
   "devDependencies": {
     "react-dom": "^15.3.2",
