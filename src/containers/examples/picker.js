@@ -24,15 +24,17 @@ class Component extends React.Component {
     const { date, hide } = this.state;
     return (
       <div>
-        <br/>
-        <br/>
+        <br />
+        <br />
         <Input
-          label="选择日期" type="date" readOnly
+          label="选择日期" type="text" readOnly
           onClick={this.onToggle.bind(this)} value={Picker.toString(date)}
         />
         {hide && (
           <Picker
-            ref={ref => this.picker = ref}
+            ref={ref => {
+              this.picker = ref;
+            }}
             from={date.getFullYear() - 50} to={date.getFullYear() + 50}
             value={date}
             onOK={this.onOK.bind(this)} onCancel={this.onToggle.bind(this)}

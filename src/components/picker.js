@@ -15,6 +15,12 @@ const UNITS = {
   date: '日',
 };
 
+const COLS = {
+  YEAR: 'year',
+  MONTH: 'month',
+  DATE: 'date',
+};
+
 class Picker extends React.Component {
   static propTypes = {
     from: PropTypes.number.isRequired,
@@ -22,10 +28,13 @@ class Picker extends React.Component {
     value: PropTypes.instanceOf(Date),
     onOK: PropTypes.func.isRequired,
     onCancel: PropTypes.func.isRequired,
+    cols: PropTypes.arrayOf(PropTypes.string).isRequired,
   }
   static defaultProps = {
     value: new Date(),
+    cols: Object.values(COLS),
   }
+  static cols = COLS
   static toString(d) {
     const year = d.getFullYear();
     const month = d.getMonth() + 1;
@@ -112,27 +121,36 @@ class Picker extends React.Component {
     );
   }
   years() {
+    if (this.props.cols.indexOf(COLS.YEAR) < 0) {
+      return null;
+    }
     const { from, to } = this.props;
     return this.waypoints(from, to, 'year');
   }
   months() {
+    if (this.props.cols.indexOf(COLS.MONTH) < 0) {
+      return null;
+    }
     return this.waypoints(1, 13, 'month');
   }
   dates() {
+    if (this.props.cols.indexOf(COLS.DATE) < 0) {
+      return null;
+    }
     const { year, month } = this.state;
     const days = (new Date(year, month, 1)
       - new Date(year, month - 1, 1)) / (1000 * 60 * 60 * 24);
     return this.waypoints(1, days + 1, 'date');
   }
   render() {
-    const { onCancel } = this.props;
+    const { cols, onCancel } = this.props;
     const { isMounted } = this.state;
     return (
       <div>
         <Mask onClick={onCancel} />
         <div className="picker">
           <div className="header">选择日期</div>
-          <div className="body">
+          <div className={`body col-${cols.length}`}>
             <div className="mirror"></div>
             {isMounted && this.years()}
             {isMounted && this.months()}
