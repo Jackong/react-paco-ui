@@ -7,6 +7,7 @@ import Tab from '../../components/tab';
 import Tabs from '../../components/tabs';
 import Icon from '../../components/icon';
 import Badge from '../../components/badge';
+import Quick from '../../components/quick';
 
 const tabs = [
   {
@@ -28,6 +29,15 @@ class Component extends React.Component {
   }
   onClick(active) {
     this.setState({ active });
+  }
+  onSearch() {
+  }
+  onQuick(char) {
+    const ref = this.refs[`char${char}`];
+    if (!ref) {
+      return;
+    }
+    ref.scrollIntoView(true);
   }
   single(type) {
     return (
@@ -63,6 +73,12 @@ class Component extends React.Component {
         </div>
         <br />
         <div>
+          <Item type={type} title="标题文字" description="内容内容" thumbnail="http://placehold.it/29x29/1cabeb/ffffff?text=PACO-UI" />
+          <Item type={type} title="标题文字" description="内容内容" thumbnail="http://placehold.it/29x29/1cabeb/ffffff?text=PACO-UI" icon={<Icon name="arrow-right" />} />
+          <Item type={type} title="标题文字" thumbnail="http://placehold.it/29x29/1cabeb/ffffff?text=PACO-UI" icon={<Icon name="arrow-right" />} />
+        </div>
+        <div ref="charA">
+          <span className="item-letter" >A</span>
           <Item type={type} title="标题文字" description="内容内容" thumbnail="http://placehold.it/29x29/1cabeb/ffffff?text=PACO-UI" />
           <Item type={type} title="标题文字" description="内容内容" thumbnail="http://placehold.it/29x29/1cabeb/ffffff?text=PACO-UI" icon={<Icon name="arrow-right" />} />
           <Item type={type} title="标题文字" thumbnail="http://placehold.it/29x29/1cabeb/ffffff?text=PACO-UI" icon={<Icon name="arrow-right" />} />
@@ -108,6 +124,7 @@ class Component extends React.Component {
           ))}
         </Tabs>
         {this[active].call(this, active)}
+        <Quick onClick={this.onQuick.bind(this)} onSearch={this.onSearch.bind(this)} />
       </div>
     );
   }
